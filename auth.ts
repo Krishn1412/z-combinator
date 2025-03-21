@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
-import GitLab from "next-auth/providers/gitlab"
+import github from "next-auth/providers/github"
  
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  providers: [GitLab],
+  providers: [github],
 })
