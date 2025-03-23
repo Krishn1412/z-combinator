@@ -1,16 +1,17 @@
 import Image from "next/image";
 import SearchForm from "../../components/SearchForm";
+import StartupCard from "@/components/StartupCard";
 
 export default async function Home({ searchParams }: {
   searchParams: Promise<{query?: string}>
 }) {
   const query = (await searchParams).query;
 
-  const post = [
+  const posts = [
     {
-      _createdAt: "Yesterday",
+      _createdAt: new Date,
       views: 55,
-      author: { _id: 1},
+      author: { _id: 1, name: "Krishn"},
       _id: 1,
       description: "This is a description",
       image:"https://plus.unsplash.com/premium_photo-1694819488591-a43907d1c5cc?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y3V0ZSUyMGRvZ3xlbnwwfHwwfHx8MA%3D%3D",
@@ -32,14 +33,15 @@ export default async function Home({ searchParams }: {
       <p className="text-30-semibold">
         {query ? `Search results for "${query}"`: 'All startups'}
       </p>
-       <ul className="mt-7 card_grid">
-        {post?.length > 0 ? (
-          post.map((StartupCardType, number) => (
-            <StartupCard/>
-          ))
-        )}
-
-       </ul>
+      <ul className="mt-7 card_grid">
+          {posts?.length > 0 ? (
+            posts.map((post: StartupTypeCard) => (
+              <StartupCard key={post?._id} post={post} />
+            ))
+          ) : (
+            <p className="no-results">No startups found</p>
+          )}
+        </ul>
      </section>
       </>
   );
