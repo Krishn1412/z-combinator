@@ -8,15 +8,15 @@ import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
 import { formSchema } from "@/lib/validation";
 import { z } from "zod";
-// import { useToast } from "@/hooks/use-toast";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { createPitch } from "@/lib/actions";
+import { useToast } from "@/hooks/use-toast";
 
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pitch, setPitch] = useState("");
   const { toast } = useToast();
-//   const router = useRouter();
+  const router = useRouter();
 
   const handleFormSubmit = async (prevState: any, formData: FormData) => {
     try {
